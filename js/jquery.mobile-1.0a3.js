@@ -461,7 +461,8 @@ function baseTagTest(){
 	if (fauxEle) {
 		fauxEle.remove();
 	}
-	return rebase.indexOf(fauxBase) === 0;
+	//return rebase.indexOf(fauxBase) === 0;
+    return false;
 };
 
 $.extend( $.support, {

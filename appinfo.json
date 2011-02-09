@@ -1,0 +1,10 @@
+{
+	"id": "com.inorbit.wildgarlic",
+	"version": "0.0.1",
+	"vendor": "ThinMachine",
+	"type": "web",
+	"main": "index.html",
+	"title": "WildGarlic",
+        "icon": "icon.png"
+}
+

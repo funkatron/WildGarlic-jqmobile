@@ -1,6 +1,11 @@
 (function($) {
 	
 	$(document).ready( function() {
+    
+        if (window.PalmSystem) {
+            window.PalmSystem.stageReady();
+        }
+    
 		/*
 			a result model
 		*/
