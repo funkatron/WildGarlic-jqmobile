@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>WildGarlic</title>
+
+	<link rel="stylesheet" href="css/jquery.mobile-1.0a3.min.css">
+	<link rel="stylesheet" href="css/app.css">
+	
+	<style type="text/css" media="screen">
+
+	</style>
+	
+	<script src="js/doT.js"></script>
+	<script src="js/jquery-1.5.min.js"></script>
+	<script src="js/underscore-min.js"></script>
+	<script src="js/backbone.js"></script>
+	<script src="js/jquery.mobile-1.0a3.min.js"></script>
+	
+	
+	<script src="app/app.js"></script>
+
+	
+	
+</head>
+<body>
+
+	<div id="page-splash" data-role="page">
+		
+		<div id="header-splash" data-role="header" data-backbtn="false">
+			<h1>WildGarlic</h1>
+			<!-- <a href="#" data-icon="gear" class="ui-btn-right">Options</a> -->
+		</div>
+		<div id="content-splash" data-role="content">
+
+			<input type="text" name="define" id="search" value="" placeholder="Term to define">
+			<button id="search-button">Search</button>
+			
+			<div id="results">
+            </div>
+			<div id="loadmore">
+				<button data-role="button">Load more…</button>
+			</div>
+			
+		</div>
+	</div>
+
+
+	<div id="page-detail" data-role="page">
+		
+		<div id="header-detail" data-role="header" data-position="fixed"><h1>Definition</h1></div>
+		<div id="content-detail" data-role="content">
+			<h2>Definition</h2>
+			<div id="definitions"></div>
+			
+			<h2>Example</h2>
+			<div id="examples"></div>
+		</div>
+	</div>
+</body>
+</html>
