@@ -50,7 +50,7 @@
 				this.trigger('fetching');
 				
 				// reset the search if we change the term
-				if (this.last_searchterm !== this.searchterm) {
+				if ((this.last_searchterm !== this.searchterm) || (opts.mode !== 'append')) {
 					this.last_searchterm = this.searchterm;
 					this.page = 1;
 				}
@@ -144,7 +144,7 @@
 			loadMore: function() {
 				if (this.results.page < this.results.total_pages) {
 					this.results.page++;
-					this.results.fetch();
+					this.results.fetch({mode:'append'});
 				}
 			},
 			
