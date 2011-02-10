@@ -9,10 +9,8 @@
 			id:null
 		});
 
-
-
 		/*
-			a results collection - a collection of reslt models
+			a results collection - a collection of result models
 			much of this is based on https://gist.github.com/705733
 		*/
 		var Results = Backbone.Collection.extend({
@@ -25,6 +23,7 @@
 			
 			model:Result,
 			page:1,
+			last_search:null,
 			
 			url:function() {
 				return 'http://www.urbandictionary.com/iphone/search/define?term='+
@@ -47,8 +46,14 @@
 				
 				var that = this;
 				var success = opts.success;
-
+				
 				this.trigger('fetching');
+				
+				// reset the search if we change the term
+				if (this.last_searchterm !== this.searchterm) {
+					this.last_searchterm = this.searchterm;
+					this.page = 1;
+				}
 				
 				opts.success = function(resp) {
 					if (success) {
@@ -61,11 +66,27 @@
 			},
 			
 			parse:function(response) {
+				var new_models = [];
+				
 				this.total = response.total;
 				this.total_pages = response.pages;
 				this.result_type = response.result_type;
 				this.has_related_words = response.has_related_words;
-				return response.list;
+				
+				new_models = response.list;
+				
+				return new_models;
+			},
+			
+			refresh:function(models, options) {
+				models  || (models = []);
+				options || (options = {});
+				if (this.page == 1) { // we redefined refres to support this
+					this._reset(); // only _reset if page == 1
+				}
+				this.add(models, {silent: true});
+				if (!options.silent) this.trigger('refresh', this, options);
+				return this;
 			},
 			
 			setSelected: function(cid) {
@@ -81,7 +102,6 @@
 		// we use doT.js templates
 		Templates = {
 			'results':[
-				// '{{ console.dir(arguments); }}',
 				'<ul data-role="listview" data-inset="true" id="results-list">',
 					'{{ _.each(it, function(res) { }}',
 						'<li data-id="{{=res.cid}}">',
